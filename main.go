@@ -6,11 +6,17 @@ import (
 	"os"
 )
 
+type Contact struct {
+	Name    string
+	Phone   string
+	Address string
+}
+
 func main() {
 	CreateContact()
 }
 
-func CreateContact() {
+func CreateContact() *Contact {
 	reader := bufio.NewReader(os.Stdin)
 
 	// Ask for contact name
@@ -29,4 +35,14 @@ func CreateContact() {
 	fmt.Println("Name:", name)
 	fmt.Println("Phone:", phone)
 	fmt.Println("Address:", address)
+
+	return NewContact(name, phone, address)
+}
+
+func NewContact(name, phone, address string) *Contact {
+	return &Contact{
+		Name:    name,
+		Phone:   phone,
+		Address: address,
+	}
 }
