@@ -15,4 +15,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Run unit tests
-      run: go test ./...
+      run: go test ./.. -race -coverprofile=coverage.txt -covermode=atomic
+		- name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./coverage.txt
+        directory: ./coverage/reports/
+        flags: unittests
